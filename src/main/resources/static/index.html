@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Summarize Prompt</title>
+</head>
+<body>
+  <h2>Summarize Prompt</h2>
+  <textarea id="prompt" rows="6" cols="60" placeholder="Enter your prompt here"></textarea><br>
+  <button onclick="summarize()">Summarize</button>
+  <h3>Result:</h3>
+  <pre id="result"></pre>
+  <script>
+    function summarize() {
+      const prompt = document.getElementById('prompt').value;
+      fetch('/api/summarize', {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain' },
+        body: prompt
+      })
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('result').textContent = data;
+      })
+      .catch(err => {
+        document.getElementById('result').textContent = 'Error: ' + err;
+      });
+    }
+  </script>
+</body>
+</html>
