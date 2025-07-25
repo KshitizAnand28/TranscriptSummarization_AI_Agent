@@ -1,5 +1,5 @@
 package com.flipr.hackathon.meetingSummerizer.meetingSummerizer.service;
-
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
@@ -9,7 +9,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+@Slf4j
 @Service
 public class LLMService {
     private static final String PROMPT_TEMPLATE= """
@@ -90,7 +90,6 @@ public class LLMService {
     private String apiKey;
 
     private final RestTemplate restTemplate = new RestTemplate();
-
     public String generateContent(String prompt) {
         String new_prompt=PROMPT_TEMPLATE+prompt;
         HttpHeaders headers = new HttpHeaders();
