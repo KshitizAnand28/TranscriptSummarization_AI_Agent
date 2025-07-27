@@ -1,30 +1,117 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Summarize Prompt</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meeting Analyzer Pro</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h2>Summarize Prompt</h2>
-  <textarea id="prompt" rows="6" cols="60" placeholder="Enter your prompt here"></textarea><br>
-  <button onclick="summarize()">Summarize</button>
-  <h3>Result:</h3>
-  <pre id="result"></pre>
-  <script>
-    function summarize() {
-      const prompt = document.getElementById('prompt').value;
-      fetch('/api/summarize', {
-        method: 'POST',
-        headers: { 'Content-Type': 'text/plain' },
-        body: prompt
-      })
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById('result').textContent = data;
-      })
-      .catch(err => {
-        document.getElementById('result').textContent = 'Error: ' + err;
-      });
-    }
-  </script>
+<div class="container">
+  <div class="header">
+    <h1><i class="fas fa-brain"></i> Meeting Analyzer Pro</h1>
+    <p>Transform your meeting transcripts into actionable insights with AI-powered analysis</p>
+  </div>
+
+  <div class="main-content">
+    <!-- Text Input Card -->
+    <div class="input-card text-card">
+      <div class="card-header">
+        <div class="card-icon">
+          <i class="fas fa-keyboard"></i>
+        </div>
+        <div>
+          <div class="card-title">Direct Text Input</div>
+          <div class="card-subtitle">Paste your meeting transcript directly</div>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label class="input-label" for="prompt">Meeting Transcript</label>
+        <textarea
+                id="prompt"
+                class="text-input"
+                placeholder="Paste your meeting transcript here...&#10;&#10;Example:&#10;(John): Let's start with the quarterly review...&#10;(Sarah): I have the numbers ready..."></textarea>
+      </div>
+
+      <button class="action-button" onclick="summarizeText()" id="textButton">
+        <div class="button-content">
+          <i class="fas fa-magic loading" id="textLoading"></i>
+          <i class="fas fa-play" id="textIcon"></i>
+          <span id="textButtonText">Analyze Meeting</span>
+        </div>
+      </button>
+    </div>
+
+    <!-- File Input Card -->
+    <div class="input-card file-card">
+      <div class="card-header">
+        <div class="card-icon">
+          <i class="fas fa-file-upload"></i>
+        </div>
+        <div>
+          <div class="card-title">File Upload</div>
+          <div class="card-subtitle">Upload transcript files (.txt, .doc, .docx, .pdf)</div>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label class="input-label">Select File</label>
+        <div class="file-input-wrapper">
+          <input type="file" id="textFile" class="file-input" accept=".txt,.doc,.docx,.pdf">
+          <div class="file-input-display" id="fileDisplay">
+            <div class="file-info">
+              <div class="file-icon">
+                <i class="fas fa-cloud-upload-alt"></i>
+              </div>
+              <div class="file-text">
+                Click to select or drag & drop your file here
+                <br><small>Supported: TXT, DOC, DOCX, PDF</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button class="action-button" onclick="summarizeTextFile()" id="fileButton" disabled>
+        <div class="button-content">
+          <i class="fas fa-magic loading" id="fileLoading"></i>
+          <i class="fas fa-file-alt" id="fileIcon"></i>
+          <span id="fileButtonText">Extract & Analyze</span>
+        </div>
+      </button>
+    </div>
+  </div>
+
+  <!-- Results Section -->
+  <div class="result-section fade-in">
+    <div class="result-header">
+      <div class="result-title">
+        <div class="result-icon">
+          <i class="fas fa-chart-line"></i>
+        </div>
+        <h3>Analysis Results</h3>
+      </div>
+
+      <div class="slack-integration">
+        <input type="checkbox" id="postToSlack" class="slack-checkbox" checked>
+        <label for="postToSlack" class="slack-label">
+          <i class="fab fa-slack"></i> Post to Slack
+        </label>
+      </div>
+    </div>
+
+    <div class="result-content" id="result">
+      <div class="result-placeholder">
+        <i class="fas fa-analytics"></i>
+        <div>Your meeting analysis will appear here...</div>
+        <small>Upload a transcript or paste text above to get started</small>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>

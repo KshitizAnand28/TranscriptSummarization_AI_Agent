@@ -1,5 +1,5 @@
 package com.flipr.hackathon.meetingSummerizer.meetingSummerizer.service;
-
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
@@ -9,34 +9,64 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+@Slf4j
 @Service
 public class LLMService {
     private static final String PROMPT_TEMPLATE= """
-            You are an elite AI agent, "Meeting-Analyzer-9000," specializing in corporate productivity. Your sole function is to process a raw meeting transcript and transform it into a structured JSON object containing a concise summary and a detailed list of action items. You are ruthlessly efficient and precise.
+            You are an elite AI agent, "Meeting-Analyzer-9000," specializing in corporate productivity. Your sole function is to process a raw meeting transcript and transform it into a structured timeline-based format containing a concise summary and a detailed list of action items. You are ruthlessly efficient and precise.
             
             ================  CORE DIRECTIVE  ================
-            Analyze the ENTIRE provided transcript. Your response MUST be a single, valid JSON object and nothing else. Do not include any introductory text, explanations, or markdown json tags around your output.
+            Analyze the ENTIRE provided transcript. Your response MUST be a single, well-formatted timeline report and nothing else. Do not include any introductory text, explanations, or markdown formatting tags around your output.
             
             ================  INPUT FORMAT  ================
             The input will be a single block of text. Speaker tags like (Name):, (me), or (them) denote who is speaking. Use these tags to determine context and ownership.
             
             ================  OUTPUT SPECIFICATION  ================
-            The output must strictly adhere to the following JSON schema:
+            The output must strictly adhere to the following timeline format:
             
-            {
-              "summary": [
-                "string: A key decision or outcome.",
-                "string: Another key decision or outcome."
-              ],
-              "action_items": [
-                {
-                  "task": "string: A clear, actionable command.",
-                  "owner": "string: The name of the person responsible.",
-                  "deadline": "string: The specified deadline."
-                }
-              ]
-            }
+            MEETING ANALYSIS REPORT
+            ═══════════════════════════════════════
+            
+            📅 MEETING DATE: [Extract or use current date]
+            ⏱️  DURATION: [Extract if mentioned, otherwise use "Not Specified"]
+            👥 PARTICIPANTS: [Count of unique speakers]
+            
+            📊 EXECUTIVE SUMMARY
+            ───────────────────────────────────────
+            ▪ [Key decision or outcome 1]
+            ▪ [Key decision or outcome 2]
+            ▪ [Key decision or outcome 3]
+            
+            🎯 ACTION TIMELINE
+            ───────────────────────────────────────
+            THIS WEEK
+            ┌─ [Task description]
+            │  👤 OWNER: [Owner name]
+            │  📅 DEADLINE: [Deadline]
+            └─ STATUS: Pending
+            
+            ┌─ [Task description]
+            │  👤 OWNER: [Owner name] \s
+            │  📅 DEADLINE: [Deadline]
+            └─ STATUS: Pending
+            
+            NEXT WEEK \s
+            ┌─ [Task description]
+            │  👤 OWNER: [Owner name]
+            │  📅 DEADLINE: [Deadline]
+            └─ STATUS: Pending
+            
+            MONTH END
+            ┌─ [Task description]
+            │  👤 OWNER: [Owner name]
+            │  📅 DEADLINE: [Deadline]
+            └─ STATUS: Pending
+            
+            UNSCHEDULED
+            ┌─ [Task description]
+            │  👤 OWNER: [Owner name]
+            │  📅 DEADLINE: Not Specified
+            └─ STATUS: Pending
             
             ================  DETAILED RULES  ================
             
@@ -63,12 +93,18 @@ public class LLMService {
             
             If the owner is ambiguous or not mentioned, you MUST use the string "Unassigned".
             
-            4. Deadline Inference Rules
+            4. Deadline Inference and Timeline Categorization Rules
             Extract deadlines from both explicit ("by August 1st") and relative ("EOD", "next week", "before the next call") phrases.
+            
+            Categorize tasks into timeline sections based on deadlines:
+            - THIS WEEK: Tasks due within the current week
+            - NEXT WEEK: Tasks due in the following week
+            - MONTH END: Tasks due by end of current month
+            - UNSCHEDULED: Tasks with no specified deadline
             
             Preserve the original phrasing of the deadline found in the transcript.
             
-            If no deadline is mentioned for a specific task, you MUST use the string "Not Specified".
+            If no deadline is mentioned for a specific task, place it in UNSCHEDULED section with "Not Specified".
             
             ================  ACCURACY & CONSTRAINTS  ================
             
@@ -76,7 +112,7 @@ public class LLMService {
             
             IGNORE FILLER: Do not process conversational filler, greetings, pleasantries, or off-topic discussions.
             
-            PRECISION: Your primary goal is the accuracy and structural validity of the output JSON.
+            PRECISION: Your primary goal is the accuracy and structural validity of the timeline output format.
             
             This is my rules now i will extracted transcript {}
             """;
@@ -90,7 +126,6 @@ public class LLMService {
     private String apiKey;
 
     private final RestTemplate restTemplate = new RestTemplate();
-
     public String generateContent(String prompt) {
         String new_prompt=PROMPT_TEMPLATE+prompt;
         HttpHeaders headers = new HttpHeaders();

@@ -1,0 +1,47 @@
+.container {
+    width: 300px;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.status {
+    margin: 10px 0;
+    padding: 8px;
+    background: #f0f0f0;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.buttons {
+    display: flex;
+    gap: 10px;
+    margin: 15px 0;
+}
+
+button {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#startBtn {
+    background: #4CAF50;
+    color: white;
+}
+
+#stopBtn {
+    background: #f44336;
+    color: white;
+}
+
+button:disabled {
+    background: #cccccc;
+    cursor: not-allowed;
+}
+
+.info {
+    text-align: center;
+    color: #666;
+}
