@@ -3,110 +3,151 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Meeting Analyzer Pro</title>
+  <title>🚀 Rocket Summarizer</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<div class="matrix-rain"></div>
+<div class="spider-webs"></div>
+<div class="floating-smoke"></div>
+<div class="cosmic-particles"></div>
+<div class="neural-network"></div>
+
 <div class="container">
+  <!-- Theme Toggle Button -->
+  <div class="theme-toggle">
+    <button id="themeToggle" class="theme-btn">
+      <i class="fas fa-moon"></i>
+    </button>
+  </div>
+
   <div class="header">
-    <h1><i class="fas fa-brain"></i> Meeting Analyzer Pro</h1>
-    <p>Transform your meeting transcripts into actionable insights with AI-powered analysis</p>
+    <div class="logo-container" id="logoContainer">
+      <div class="rocket-glow">
+        <i class="fas fa-rocket rocket-logo" id="rocketLogo"></i>
+      </div>
+    </div>
+    <h1 class="site-title glitch-text" id="siteTitle" data-text="🚀 ROCKET SUMMARIZER">
+      🚀 ROCKET SUMMARIZER
+    </h1>
+    <p class="subtitle terminal-text">
+      <span class="typing-effect">$ sudo ./analyze_meeting --mode=<span id="themeIndicator">dark</span> --theme=cosmic --output=insights</span>
+    </p>
   </div>
 
   <div class="main-content">
     <!-- Text Input Card -->
-    <div class="input-card text-card">
+    <div class="input-card text-card cyber-card">
+      <div class="card-glow"></div>
       <div class="card-header">
-        <div class="card-icon">
-          <i class="fas fa-keyboard"></i>
+        <div class="card-icon tech-icon">
+          <i class="fas fa-terminal"></i>
         </div>
         <div>
-          <div class="card-title">Direct Text Input</div>
-          <div class="card-subtitle">Paste your meeting transcript directly</div>
+          <div class="card-title">Neural Text Input</div>
+          <div class="card-subtitle">Inject your meeting transcript into the matrix</div>
         </div>
       </div>
 
       <div class="input-group">
-        <label class="input-label" for="prompt">Meeting Transcript</label>
+        <label class="input-label hacker-label" for="prompt">
+          <i class="fas fa-code"></i> Meeting Transcript Buffer
+        </label>
         <textarea
                 id="prompt"
-                class="text-input"
-                placeholder="Paste your meeting transcript here...&#10;&#10;Example:&#10;(John): Let's start with the quarterly review...&#10;(Sarah): I have the numbers ready..."></textarea>
+                class="text-input cyber-input"
+                placeholder="// Paste your meeting transcript here..."></textarea>
+        <div class="typewriter-overlay" id="typewriterOverlay"></div>
       </div>
 
-      <button class="action-button" onclick="summarizeText()" id="textButton">
+      <button class="action-button cyber-button" onclick="summarizeText()" id="textButton">
         <div class="button-content">
-          <i class="fas fa-magic loading" id="textLoading"></i>
-          <i class="fas fa-play" id="textIcon"></i>
-          <span id="textButtonText">Analyze Meeting</span>
+          <i class="fas fa-magic loading neon-spin" id="textLoading"></i>
+          <i class="fas fa-rocket" id="textIcon"></i>
+          <span id="textButtonText">INITIATE HACK</span>
         </div>
+        <div class="button-particles"></div>
       </button>
     </div>
 
     <!-- File Input Card -->
-    <div class="input-card file-card">
+    <div class="input-card file-card cyber-card">
+      <div class="card-glow"></div>
       <div class="card-header">
-        <div class="card-icon">
-          <i class="fas fa-file-upload"></i>
+        <div class="card-icon tech-icon">
+          <i class="fas fa-brain"></i>
         </div>
         <div>
-          <div class="card-title">File Upload</div>
-          <div class="card-subtitle">Upload transcript files (.txt, .doc, .docx, .pdf)</div>
+          <div class="card-title">Neural File Upload</div>
+          <div class="card-subtitle">Upload encrypted files (.txt, .doc, .docx, .pdf)</div>
         </div>
       </div>
 
       <div class="input-group">
-        <label class="input-label">Select File</label>
+        <label class="input-label hacker-label">
+          <i class="fas fa-upload"></i> Select Payload
+        </label>
         <div class="file-input-wrapper">
-          <input type="file" id="textFile" class="file-input" accept=".txt,.doc,.docx,.pdf">
-          <div class="file-input-display" id="fileDisplay">
+          <!-- Hidden file input -->
+          <input type="file" id="textFile" class="file-input" accept=".txt,.doc,.docx,.pdf" style="display: none;">
+
+          <!-- Visible dropzone that triggers file picker -->
+          <div class="file-input-display cyber-dropzone" id="fileDisplay" onclick="triggerFileInput()">
             <div class="file-info">
               <div class="file-icon">
-                <i class="fas fa-cloud-upload-alt"></i>
+                <i class="fas fa-skull-crossbones"></i>
               </div>
               <div class="file-text">
-                Click to select or drag & drop your file here
+                <span class="glitch-text" data-text="CLICK OR DROP PAYLOAD HERE">CLICK OR DROP PAYLOAD HERE</span>
                 <br><small>Supported: TXT, DOC, DOCX, PDF</small>
               </div>
             </div>
           </div>
+
+          <!-- Alternative file upload button -->
+          <button type="button" class="file-browse-btn cyber-button-secondary" onclick="triggerFileInput()">
+            <i class="fas fa-folder-open"></i> Browse Files
+          </button>
         </div>
       </div>
 
-      <button class="action-button" onclick="summarizeTextFile()" id="fileButton" disabled>
+      <button class="action-button cyber-button" onclick="summarizeTextFile()" id="fileButton" disabled>
         <div class="button-content">
-          <i class="fas fa-magic loading" id="fileLoading"></i>
-          <i class="fas fa-file-alt" id="fileIcon"></i>
-          <span id="fileButtonText">Extract & Analyze</span>
+          <i class="fas fa-magic loading neon-spin" id="fileLoading"></i>
+          <i class="fas fa-brain" id="fileIcon"></i>
+          <span id="fileButtonText">DECRYPT & ANALYZE</span>
         </div>
+        <div class="button-particles"></div>
       </button>
     </div>
   </div>
 
   <!-- Results Section -->
-  <div class="result-section fade-in">
+  <div class="result-section fade-in cyber-card">
+    <div class="card-glow"></div>
     <div class="result-header">
       <div class="result-title">
         <div class="result-icon">
-          <i class="fas fa-chart-line"></i>
+          <i class="fas fa-eye"></i>
         </div>
-        <h3>Analysis Results</h3>
+        <h3 class="glitch-text" data-text="MISSION OUTPUT">MISSION OUTPUT</h3>
       </div>
 
-      <div class="slack-integration">
+      <div class="slack-integration cyber-toggle">
         <input type="checkbox" id="postToSlack" class="slack-checkbox" checked>
         <label for="postToSlack" class="slack-label">
-          <i class="fab fa-slack"></i> Post to Slack
+          <i class="fab fa-slack"></i> Transmit to Slack
         </label>
       </div>
     </div>
 
-    <div class="result-content" id="result">
+    <div class="result-content terminal-output" id="result">
       <div class="result-placeholder">
-        <i class="fas fa-analytics"></i>
-        <div>Your meeting analysis will appear here...</div>
-        <small>Upload a transcript or paste text above to get started</small>
+        <div class="terminal-cursor"></div>
+        <i class="fas fa-satellite-dish pulse-icon"></i>
+        <div class="typing-effect">Awaiting neural input...</div>
+        <small>$ Upload transcript || paste text > initialize_analysis.exe</small>
       </div>
     </div>
   </div>

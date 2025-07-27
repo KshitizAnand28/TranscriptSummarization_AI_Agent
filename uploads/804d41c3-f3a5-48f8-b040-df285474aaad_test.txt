@@ -1,0 +1,27 @@
+(Jayesh): Alright, let's get started. First on the agenda is prepping the Q3 sales report. Kshitiz, can you handle preparing the draft?
+
+(Kshitiz): Sure, I’ll work on the Q3 sales report and have the first draft ready by Thursday.
+
+(Jayesh): Perfect. Yashraj, could you review the client feedback from last week and prepare summary slides for our Monday meeting?
+
+(Yashraj): Absolutely. I’ll send out the summary slides by Friday EOD.
+
+(Jayesh): Great. We also need to schedule a follow-up call with the TechLabs client.
+
+(Kshitiz): I can take care of scheduling that call. Is next Wednesday okay?
+
+(Jayesh): Next Wednesday works. Please confirm with TechLabs and share the invite by Monday.
+
+(Yashraj): One more thing: Can I assign myself updating the onboarding documentation? There are some new changes.
+
+(Jayesh): Go ahead, Yashraj. Let’s aim for a draft by the end of next week.
+
+(Kshitiz): Just to confirm, I’ll also send the updated meeting agenda for our weekly sync by tomorrow morning.
+
+(Jayesh): Thanks, Kshitiz. Are there any blockers or other urgent items?
+
+(Yashraj): Nothing from my side.
+
+(Kshitiz): All clear for now.
+
+(Jayesh): Perfect. Let’s reconvene on Monday. Thanks, everyone.
