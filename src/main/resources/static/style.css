@@ -518,6 +518,127 @@ body.light-theme .cyber-input::placeholder {
     color: rgba(51, 65, 85, 0.7);
 }
 
+/* Enhanced File Input Wrapper */
+.file-input-wrapper {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.file-input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+}
+
+.cyber-dropzone {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    border: 2px dashed var(--glass-border);
+    border-radius: 12px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    transition: all 0.4s ease;
+    cursor: pointer;
+    min-height: 130px;
+    position: relative;
+    overflow: hidden;
+    user-select: none;
+}
+
+.cyber-dropzone:hover {
+    border-color: var(--accent-blue);
+    background: rgba(45, 109, 136, 0.08);
+    transform: scale(1.02);
+    box-shadow: 0 0 25px rgba(45, 109, 136, 0.2);
+}
+
+.cyber-dropzone:active {
+    transform: scale(0.98);
+}
+
+.cyber-dropzone.drag-over {
+    border-color: var(--accent-hover);
+    background: rgba(55, 90, 127, 0.1);
+    transform: scale(1.02);
+    box-shadow: 0 0 25px rgba(55, 90, 127, 0.3);
+}
+
+.cyber-dropzone.oceanic-wave {
+    animation: oceanicRipple 1s ease-out;
+}
+
+.file-info {
+    text-align: center;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.file-icon {
+    font-size: 2.5rem;
+    color: var(--text-secondary);
+    margin-bottom: 10px;
+    display: block;
+}
+
+.file-text {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    font-weight: 500;
+    font-family: 'Share Tech Mono', monospace;
+}
+
+.file-selected {
+    background: rgba(45, 109, 136, 0.1);
+    border-color: var(--accent-blue);
+}
+
+.file-selected .file-icon {
+    color: var(--accent-blue);
+}
+
+.file-selected .file-text {
+    color: var(--accent-blue);
+}
+
+/* File Browse Button */
+.file-browse-btn {
+    width: 100%;
+    padding: 12px 20px;
+    background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue-dark));
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    font-family: 'Orbitron', monospace;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.file-browse-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    background: linear-gradient(135deg, var(--accent-hover), var(--accent-purple));
+}
+
+.file-browse-btn:active {
+    transform: translateY(0);
+}
+
 .cyber-button {
     width: 100%;
     padding: 18px 30px;
@@ -590,85 +711,6 @@ body.light-theme .cyber-input::placeholder {
 .neon-spin.show {
     display: inline-block;
     animation: neonSpin 1.5s linear infinite;
-}
-
-.file-input-wrapper {
-    position: relative;
-    width: 100%;
-}
-
-.file-input {
-    position: absolute;
-    opacity: 0;
-    width: 100%;
-    height: 100%;
-    cursor: pointer;
-}
-
-.cyber-dropzone {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 30px;
-    border: 2px dashed var(--glass-border);
-    border-radius: 12px;
-    background: var(--glass-bg);
-    backdrop-filter: blur(20px);
-    transition: all 0.4s ease;
-    cursor: pointer;
-    min-height: 130px;
-    position: relative;
-    overflow: hidden;
-}
-
-.cyber-dropzone:hover {
-    border-color: var(--accent-blue);
-    background: rgba(45, 109, 136, 0.08);
-    transform: scale(1.02);
-    box-shadow: 0 0 25px rgba(45, 109, 136, 0.2);
-}
-
-.cyber-dropzone.drag-over {
-    border-color: var(--accent-hover);
-    background: rgba(55, 90, 127, 0.1);
-    transform: scale(1.02);
-    box-shadow: 0 0 25px rgba(55, 90, 127, 0.3);
-}
-
-.cyber-dropzone.oceanic-wave {
-    animation: oceanicRipple 1s ease-out;
-}
-
-.file-info {
-    text-align: center;
-    z-index: 2;
-}
-
-.file-icon {
-    font-size: 2.5rem;
-    color: var(--text-secondary);
-    margin-bottom: 10px;
-    display: block;
-}
-
-.file-text {
-    color: var(--text-secondary);
-    font-size: 1rem;
-    font-weight: 500;
-    font-family: 'Share Tech Mono', monospace;
-}
-
-.file-selected {
-    background: rgba(45, 109, 136, 0.1);
-    border-color: var(--accent-blue);
-}
-
-.file-selected .file-icon {
-    color: var(--accent-blue);
-}
-
-.file-selected .file-text {
-    color: var(--accent-blue);
 }
 
 .result-section {

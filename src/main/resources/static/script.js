@@ -248,7 +248,7 @@ document.addEventListener('DOMContentLoaded', function() {
             fileDisplay.innerHTML = `
                 <div class="file-info">
                     <div class="file-icon">
-                        <i class="fas fa-skull-crossbones neon-green"></i>
+                        <i class="fas fa-file-check neon-green"></i>
                     </div>
                     <div class="file-text">
                         <strong class="cyber-text">${file.name}</strong>
@@ -257,6 +257,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
             `;
             fileButton.disabled = false;
+
+            // Add click functionality to selected file display
+            fileDisplay.onclick = triggerFileInput;
         } else {
             resetFileDisplay();
         }
@@ -265,24 +268,36 @@ document.addEventListener('DOMContentLoaded', function() {
     // Enhanced drag and drop with oceanic wave effects
     fileDisplay.addEventListener('dragover', function(e) {
         e.preventDefault();
+        e.stopPropagation();
         fileDisplay.classList.add('drag-over', 'oceanic-wave');
         createWaveEffect(e.clientX, e.clientY);
     });
 
     fileDisplay.addEventListener('dragleave', function(e) {
         e.preventDefault();
+        e.stopPropagation();
         fileDisplay.classList.remove('drag-over', 'oceanic-wave');
     });
 
     fileDisplay.addEventListener('drop', function(e) {
         e.preventDefault();
+        e.stopPropagation();
         fileDisplay.classList.remove('drag-over', 'oceanic-wave');
         createSplashEffect(e.clientX, e.clientY);
 
         const files = e.dataTransfer.files;
         if (files.length > 0) {
-            fileInput.files = files;
-            fileInput.dispatchEvent(new Event('change'));
+            // Validate file type
+            const file = files[0];
+            const allowedTypes = ['.txt', '.doc', '.docx', '.pdf'];
+            const fileExtension = '.' + file.name.split('.').pop().toLowerCase();
+
+            if (allowedTypes.includes(fileExtension)) {
+                fileInput.files = files;
+                fileInput.dispatchEvent(new Event('change'));
+            } else {
+                alert('Invalid file type. Please select a TXT, DOC, DOCX, or PDF file.');
+            }
         }
     });
 
@@ -315,12 +330,13 @@ document.addEventListener('DOMContentLoaded', function() {
                     <i class="fas fa-skull-crossbones"></i>
                 </div>
                 <div class="file-text">
-                    <span class="glitch-text" data-text="DROP PAYLOAD HERE">DROP PAYLOAD HERE</span>
+                    <span class="glitch-text" data-text="CLICK OR DROP PAYLOAD HERE">CLICK OR DROP PAYLOAD HERE</span>
                     <br><small>Supported: TXT, DOC, DOCX, PDF</small>
                 </div>
             </div>
         `;
         fileButton.disabled = true;
+        fileDisplay.onclick = triggerFileInput;
     }
 
     // Add oceanic hover effects to cards
@@ -335,6 +351,12 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
+// Global function to trigger file input
+function triggerFileInput() {
+    const fileInput = document.getElementById('textFile');
+    fileInput.click();
+}
 
 // Keep original functions intact for backend
 function setLoadingState(buttonId, isLoading) {

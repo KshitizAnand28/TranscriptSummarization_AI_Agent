@@ -31,7 +31,8 @@ public class ApiController {
         String result = llmService.generateContent(prompt);
 
         // Optionally post to Slack
-        slackService.postSummaryToSlack(result, "Text Input");
+//        slackService.postSummaryToSlack(result, "Text Input");
+        slackService.postMessage(result);
 
         return ResponseEntity.ok(result);
     }
