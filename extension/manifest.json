@@ -1,0 +1,30 @@
+{
+  "manifest_version": 3,
+  "name": "Google Meet Transcript Saver",
+  "version": "1.0",
+  "description": "Capture and save Google Meet captions as transcripts",
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "downloads",
+    "tabs"
+  ],
+  "host_permissions": [
+    "https://meet.google.com/*"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Meet Transcript Saver"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://meet.google.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ]
+}
