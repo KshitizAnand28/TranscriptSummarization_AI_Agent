@@ -4,25 +4,26 @@ A comprehensive Spring Boot application that provides intelligent meeting summar
 
  🚀 Features
 
-- **AI-Powered Summarization**: Uses Google Gemini 2.0 for intelligent meeting analysis
+- **AI-Powered Summarization**: Uses Google Gemini 2.0 for intelligent meeting analysis                                                    //ask
 - **Slack Integration**: Automatically posts summaries to your team channels
 - **Chrome Extension Support**: Load extension and capture Google Meet captions
-- **Multiple Input Methods**: Text paste, file upload, and extension integration
+- **Multiple Input Methods**: Text paste, file upload.
 - **Docker Deployment**: Easy containerized deployment from Docker Hub
 - **Secure Configuration**: Environment variables for API key management
 
-## 📋 Prerequisites
+📋 Prerequisites
 
 - Docker installed on your system
 - Google account (for Gemini API)
 - Slack workspace admin access
 - Google Chrome browser
 - Google Meet with captions enabled
+  We are not sharing our own keys and tokens because of security reasons and Github rules and regulations.
 
-## 🔧 Quick Start with Docker Hub
+🔧 Quick Start with Docker Hub
 
-### Pull and Run the Application
-Pull the latest image from Docker Hub
+ Pull and Run the Application
+ Pull the latest image from Docker Hub
 
 docker pull spidermanmil/meeting-summarizer:latest
 Run with your environment variables (Linux/macOS)
@@ -31,10 +32,10 @@ docker run -d -p 8080:8080
 -e GEMINI_API_KEY=your_gemini_api_key_here
 -e SLACK_BOT_TOKEN=your_slack_bot_token_here
 -e SLACK_CHANNEL=your-channel-name
---name meeting-summarizer-app
+--name meeting-summarizer-app                                                                                                               //ask
 spidermanmil/meeting-summarizer:latest
-Windows Command Prompt Version
 
+Windows Command Prompt Version
 docker run -d -p 8080:8080 -e GEMINI_API_KEY=your_gemini_api_key_here -e SLACK_BOT_TOKEN=your_slack_bot_token_here -e SLACK_CHANNEL=your-channel-name -e SERVER_ADDRESS=0.0.0.0 --name meeting-summarizer-app spidermanmil/meeting-summarizer:latest
 
 
@@ -91,7 +92,7 @@ docker run -d -p 8080:8080 -e GEMINI_API_KEY=your_gemini_api_key_here -e SLACK_B
 ## 🌐 Chrome Extension Setup
 
 ### Step 1: Load Extension in Chrome
-1. Download the extension files to your computer
+1. Download the extension files to your computer. Thw extension file is available in the repository as "extension"
 2. Open Google Chrome
 3. Go to `chrome://extensions/`
 4. Enable **"Developer mode"** (top right toggle)
@@ -99,7 +100,7 @@ docker run -d -p 8080:8080 -e GEMINI_API_KEY=your_gemini_api_key_here -e SLACK_B
 5. Select the extension folder
 6. Pin the extension to your toolbar
 
-### Step 2: Configure Extension Settings
+### Step 2: Configure Extension Settings                                              //ask
 1. Right-click the extension icon
 2. Select **"Options"**
 3. Set **Meeting Summarizer URL**: `http://localhost:8080`
@@ -122,7 +123,7 @@ docker run -d -p 8080:8080 -e GEMINI_API_KEY=your_gemini_api_key_here -e SLACK_B
 3. **Participate normally** in your meeting
 4. Extension shows recording indicator
 
-#### Step 3: After Meeting
+#### Step 3: After Meeting                                                                  //ask
 1. **Stop recording**: Click extension icon → "Stop Capture"
 2. **Review transcript** in extension popup
 3. **Click "Upload to Summarizer"**
