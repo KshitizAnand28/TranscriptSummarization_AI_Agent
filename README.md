@@ -1,10 +1,10 @@
  Meeting Summarizer AI Agent - Complete Setup Guide
 
-A comprehensive Spring Boot application that provides intelligent meeting summarization using Google's Gemini 2.0 AI model. Features real-time Slack integration and Chrome extension support for seamless meeting transcript processing.
+A comprehensive Spring Boot application that provides intelligent meeting summarization using Google's Gemini 2.5 flash AI model. Features real-time Slack integration and Chrome extension support for seamless meeting transcript processing.
 
  🚀 Features
 
-- **AI-Powered Summarization**: Uses Google Gemini 2.0 for intelligent meeting analysis                                                    //ask
+- **AI-Powered Summarization**: Uses Google Gemini 2.5 flash for intelligent meeting analysis                                                   
 - **Slack Integration**: Automatically posts summaries to your team channels
 - **Chrome Extension Support**: Load extension and capture Google Meet captions
 - **Multiple Input Methods**: Text paste, file upload.
@@ -32,16 +32,15 @@ docker run -d -p 8080:8080
 -e GEMINI_API_KEY=your_gemini_api_key_here
 -e SLACK_BOT_TOKEN=your_slack_bot_token_here
 -e SLACK_CHANNEL=your-channel-name
---name meeting-summarizer-app                                                                                                               //ask
 spidermanmil/meeting-summarizer:latest
 
 Windows Command Prompt Version
-docker run -d -p 8080:8080 -e GEMINI_API_KEY=your_gemini_api_key_here -e SLACK_BOT_TOKEN=your_slack_bot_token_here -e SLACK_CHANNEL=your-channel-name -e SERVER_ADDRESS=0.0.0.0 --name meeting-summarizer-app spidermanmil/meeting-summarizer:latest
+docker run -d -p 8080:8080 -e GEMINI_API_KEY=your_gemini_api_key_here -e SLACK_BOT_TOKEN=your_slack_bot_token_here -e SLACK_CHANNEL=your-channel-name -e  spidermanmil/meeting-summarizer:latest
 
 
 ## 🔑 Complete API Setup Guide
 
-### 1. Create Google Gemini 2.0 API Key
+### 1. Create Google Gemini 2.5 flash API Key
 
 #### Step 1: Access Google AI Studio
 1. Go to [aistudio.google.com](https://aistudio.google.com)
@@ -56,11 +55,11 @@ docker run -d -p 8080:8080 -e GEMINI_API_KEY=your_gemini_api_key_here -e SLACK_B
 5. **Important**: Copy and save this key securely
 6. Click **"Done"**
 
-#### Step 3: Verify Gemini 2.0 Model Access
+#### Step 3: Verify Gemini 2.5 flash Model Access
 1. In AI Studio, click **"Chat"**
-2. Select **"Gemini 2.0 Flash"** from the model dropdown
+2. Select **"Gemini 2.5 Flash"** from the model dropdown
 3. Test with a simple prompt to ensure access
-4. Your API key now has access to Gemini 2.0
+4. Your API key now has access to Gemini 2.5 flash
 
 ### 2. Create Slack Bot API
 
@@ -100,12 +99,6 @@ docker run -d -p 8080:8080 -e GEMINI_API_KEY=your_gemini_api_key_here -e SLACK_B
 5. Select the extension folder
 6. Pin the extension to your toolbar
 
-### Step 2: Configure Extension Settings                                              //ask
-1. Right-click the extension icon
-2. Select **"Options"**
-3. Set **Meeting Summarizer URL**: `http://localhost:8080`
-4. Enable **"Auto-upload transcripts"**
-5. Save settings
 
 ## 📝 Complete Workflow Guide
 
@@ -123,19 +116,11 @@ docker run -d -p 8080:8080 -e GEMINI_API_KEY=your_gemini_api_key_here -e SLACK_B
 3. **Participate normally** in your meeting
 4. Extension shows recording indicator
 
-#### Step 3: After Meeting                                                                  //ask
+#### Step 3: After Meeting                                                                 
 1. **Stop recording**: Click extension icon → "Stop Capture"
 2. **Review transcript** in extension popup
-3. **Click "Upload to Summarizer"**
-4. Extension sends transcript to your application
 
-#### Step 4: Get Results
-1. **AI processes transcript** using Gemini 2.0
-2. **Summary generated** automatically
-3. **Slack notification** posted to your configured channel
-4. **View results** at `http://localhost:8080`
-
-### Method 2: Manual Transcript Upload
+### Manual Transcript Upload
 
 #### Step 1: Get Transcript
 1. **Copy transcript** from Google Meet captions
@@ -152,7 +137,7 @@ docker run -d -p 8080:8080 -e GEMINI_API_KEY=your_gemini_api_key_here -e SLACK_B
 ## 🔧 Configuration Examples
 
 ### Environment Variables Required
-GEMINI_API_KEY=AIzaSyBXXXXXXXXXXXXXXXXXXXXXXXXXXXXX # Your Gemini 2.0 API key
+GEMINI_API_KEY=AIzaSyBXXXXXXXXXXXXXXXXXXXXXXXXXXXXX # Your Gemini 2.5 flash API key
 SLACK_BOT_TOKEN=xoxb-123456789067890-XXXXXXXXXXXXXXXXXXXXXXXX # Your Slack bot token
 SLACK_CHANNEL=general # Channel name (without #)
 
@@ -161,10 +146,9 @@ SLACK_CHANNEL=general # Channel name (without #)
 
 ### Test Container Status
 Check if container is running
-
 docker ps
-View container logs
 
+View container logs
 docker logs meeting-summarizer-app
 
 
@@ -195,7 +179,7 @@ docker logs meeting-summarizer-app
 
 **Gemini API errors:**
 - Confirm API key starts with `AIzaSy`
-- Verify Gemini 2.0 model access in AI Studio
+- Verify Gemini 2.5 flash model access in AI Studio
 - Check API quotas in Google Cloud Console
 
 **Slack integration fails:**
@@ -210,7 +194,6 @@ docker logs meeting-summarizer-app
 
 **Connection refused (localhost:8080):**
 - Verify container is running: `docker ps`
-- Check SERVER_ADDRESS=0.0.0.0 is set
 - Restart container if needed: `docker restart meeting-summarizer-app`
 
 ### Container Management Commands
@@ -264,7 +247,7 @@ After deployment, you should see:
 ## 🚀 Quick Start Checklist
 
 - [ ] Docker installed and running
-- [ ] Google Gemini 2.0 API key created
+- [ ] Google Gemini 2.5 flash API key created
 - [ ] Slack bot created with `chat:write` permission
 - [ ] Bot invited to target Slack channel
 - [ ] Chrome extension loaded (if using)
@@ -272,22 +255,6 @@ After deployment, you should see:
 - [ ] Application accessible at `http://localhost:8080`
 - [ ] Test summarization working
 - [ ] Slack notifications appearing
-
-## 🎬 Demo Video Script Points
-
-### Opening (Show the problem)
-"Endless meetings, but no time for proper follow-ups. With Google Meet Premium providing transcripts, we now have the raw data - but turning that into actionable insights still takes time."
-
-### Solution Demo
-1. **Start Docker container** with your API keys
-2. **Join Google Meet** with captions enabled
-3. **Use Chrome extension** to capture transcript
-4. **Upload to localhost:8080** for processing
-5. **Show AI-generated summary** with action items
-6. **Display Slack notification** with formatted results
-
-### Key Message
-"From 45 minutes of meeting content to a structured 2-minute summary with automatic team sharing via Slack."
 
 ## 📞 Support
 
