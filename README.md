@@ -13,7 +13,7 @@ A comprehensive Spring Boot application that provides intelligent meeting summar
 
 📋 Prerequisites
 
-- Docker installed on your system
+- Docker desktop app installed on your system
 - Google account (for Gemini API)
 - Slack workspace admin access
 - Google Chrome browser
